@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function LogInPage() {
   return (
-    <div>LogInPage</div>
+    <>
+    <h1>Hellooo</h1>
+    </>
   )
 }
