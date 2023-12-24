@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 
@@ -18,8 +18,9 @@ export default function AuthProvider({ children }) {
       });
   }
 
-  function signUp() {
-    // Implement sign-up functionality
+  function signUp( email,password) {
+    createUserWithEmailAndPassword(auth,email,password)
+   
   }
 
   function resetPassword() {

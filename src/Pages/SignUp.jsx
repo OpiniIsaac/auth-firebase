@@ -1,21 +1,24 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import { useRef } from 'react';
 import { useAuth } from '../context/AithProvider';
 // Import useHistory for navigation
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export default function LogInPage() {
+export default function SignUp() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { signIn,currentUser } = useAuth();
- 
+  const confirmPasswordRef = useRef();
+  const { signUp } = useAuth();
   const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await signIn(emailRef.current.value, passwordRef.current.value); // Pass the values from refs to login
-      navigate('/dashboard'); // Use history.push for navigation
-      console.log(currentUser)
+     if (passwordRef.current.value === confirmPasswordRef.current.value){
+          await signUp(emailRef.current.value, passwordRef.current.value);
+          navigate('/login');
+     }
+     
+    
     } catch {
       console.log('Error occurred');
     }
@@ -37,21 +40,24 @@ export default function LogInPage() {
             label="Email"
             variant="filled"
             sx={{ width: '100%' }}
-            inputRef={emailRef} // Use inputRef for TextField
+            inputRef={emailRef} 
           />
-          <TextField
+           <TextField
             id="password"
             label="Password"
             variant="filled"
             sx={{ width: '100%' }}
-            inputRef={passwordRef} // Use inputRef for TextField
+            inputRef={passwordRef} 
           />
+          <TextField
+            id="password"
+            label="Confirm Password"
+            variant="filled"
+            sx={{ width: '100%' }}
+            inputRef={confirmPasswordRef}           />
           <Button type="submit" variant="contained" sx={{ width: '100%' }}>
             Sign In
           </Button>
-          <Typography>
-Dont have an accont <Link to='/signUp'> SIgn Up </Link>
-          </Typography>
         </Box>
       </div>
     </div>
