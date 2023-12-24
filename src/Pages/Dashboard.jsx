@@ -8,11 +8,21 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Container } from '@mui/material';
 import { useAuth } from '../context/AithProvider';
+import { useNavigate } from 'react-router-dom';
 
 export default function ButtonAppBar() {
 
      const {currentUser,logout} = useAuth()
+     const navigate = useNavigate()
+async function handleSubmit (){
+try {
+     await logout()
+     navigate('/login')
+} catch (error) {
+ console.log(error)    
+}
 
+}
   return (
     <>
     

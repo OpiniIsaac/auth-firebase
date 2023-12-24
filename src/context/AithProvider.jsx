@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 
@@ -26,6 +26,9 @@ export default function AuthProvider({ children }) {
   function resetPassword() {
     // Implement reset password functionality
   }
+  function logout() {
+   signOut(auth)
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -41,6 +44,7 @@ export default function AuthProvider({ children }) {
     signIn,
     resetPassword,
     signUp,
+    logout
   };
   if (loading) {
     return <div>Loading...</div>;
